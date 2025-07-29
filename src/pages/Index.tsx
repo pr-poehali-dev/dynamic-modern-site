@@ -19,10 +19,23 @@ export default function Index() {
       icon: "Shield"
     },
     {
-      title: "Pelastussuunnitelman laatiminen",
-      description: "Turvallisuusriskien arviointi ja pelastussuunnitelman konsultointi",
-      icon: "FileText"
+      title: "Ensiapupalvelut",
+      description: "Koulutettu ensiapuhenkilöstö tapahtumiin ja hätätilanteisiin",
+      icon: "Heart",
+      image: "https://cdn.poehali.dev/files/c8ec5548-4fde-4089-a442-c848bbbba2e5.jpeg"
     }
+  ];
+
+  const additionalServices = [
+    "Suunnittelu ja avustaminen lupa-asioissa",
+    "Pelastussuunnitelman laatiminen", 
+    "Turvallisuusjohtaminen",
+    "Turvallisuuspäällikköpalvelut",
+    "Järjestyksenvalvonta",
+    "Turvatarkastukset",
+    "Ensiapupalvelut",
+    "Jälkitoimenpiteiden toteuttaminen",
+    "Naulakkopalvelut"
   ];
 
   const teamMembers = [
@@ -53,7 +66,7 @@ export default function Index() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center">
             <img 
-              src="https://cdn.poehali.dev/files/92d10fa3-e56b-4e6e-9f31-864f3e21bd5d.jpeg" 
+              src="https://cdn.poehali.dev/files/318658ce-521b-41ec-b2cc-ef0fec265cce.png" 
               alt="Sectores" 
               className="h-12 w-auto object-contain"
             />
@@ -263,16 +276,28 @@ export default function Index() {
               Tarjoamme laajan valikoiman turvallisuuspalveluja, jotka räätälöimme aina asiakkaidemme tarpeiden mukaan
             </p>
             
+            {/* Main Services */}
             <div className="grid md:grid-cols-3 gap-8 mb-12">
               {services.map((service, index) => (
                 <Card 
                   key={index} 
-                  className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/50"
+                  className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/50 overflow-hidden"
                 >
-                  <CardHeader className="text-center">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Icon name={service.icon as any} size={32} className="text-primary" />
+                  {service.image && (
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={service.image} 
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
+                  )}
+                  <CardHeader className="text-center">
+                    {!service.image && (
+                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Icon name={service.icon as any} size={32} className="text-primary" />
+                      </div>
+                    )}
                     <CardTitle className="text-xl">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -282,6 +307,29 @@ export default function Index() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            {/* Additional Services */}
+            <div className="bg-muted/50 rounded-2xl p-8 mb-12">
+              <h3 className="text-2xl font-semibold text-center mb-6">Lisäpalvelumme</h3>
+              <div className="grid md:grid-cols-3 gap-4 mb-8">
+                {additionalServices.map((service, index) => (
+                  <div key={index} className="flex items-center space-x-3 p-3 bg-background rounded-lg">
+                    <Icon name="Check" size={20} className="text-primary flex-shrink-0" />
+                    <span className="text-sm">{service}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Pricing Information */}
+            <div className="bg-primary/5 rounded-2xl p-8 mb-12">
+              <h3 className="text-2xl font-semibold text-center mb-6">Hinnoittelu</h3>
+              <p className="text-lg text-muted-foreground leading-relaxed text-center max-w-4xl mx-auto">
+                Tarjoamme kilpailukykyisen ja selkeästi eritellyn hinnoittelun, joka perustuu tapahtuman tai 
+                kohteen yksilöllisiin tarpeisiin. Räätälöimme tarjouksen aina asiakaskohtaisesti, läpinäkyvästi 
+                ja kustannustehokkaasti.
+              </p>
             </div>
 
             <div className="bg-muted/50 rounded-2xl p-8 mb-12">
@@ -395,7 +443,34 @@ export default function Index() {
                     </div>
                     <div>
                       <div className="font-semibold">Sähköposti</div>
-                      <div className="text-white/80">info@sectores.fi</div>
+                      <div className="text-white/80">Management@sectores.fi</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                      <Icon name="Instagram" size={24} />
+                    </div>
+                    <div>
+                      <div className="font-semibold">Instagram</div>
+                      <div className="text-white/80">@Sectores.fi</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                      <Icon name="Facebook" size={24} />
+                    </div>
+                    <div>
+                      <div className="font-semibold">Facebook</div>
+                      <a 
+                        href="https://www.facebook.com/profile.php?id=61574191452174" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-white/80 hover:text-white transition-colors"
+                      >
+                        Sectores Facebook
+                      </a>
                     </div>
                   </div>
                   
@@ -423,32 +498,44 @@ export default function Index() {
               
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
                 <h4 className="text-xl font-semibold mb-6">Pyydä tarjous</h4>
-                <form className="space-y-4">
+                <form 
+                  className="space-y-4"
+                  action="mailto:Management@sectores.fi"
+                  method="post"
+                  encType="text/plain"
+                >
                   <div>
                     <input 
                       type="text" 
+                      name="name"
                       placeholder="Nimi" 
+                      required
                       className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
                   <div>
                     <input 
                       type="email" 
+                      name="email"
                       placeholder="Sähköposti" 
+                      required
                       className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
                   <div>
                     <input 
                       type="tel" 
+                      name="phone"
                       placeholder="Puhelinnumero" 
                       className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
                   <div>
                     <textarea 
+                      name="message"
                       placeholder="Kuvaile turvallisuustarpeitasi..." 
                       rows={4}
+                      required
                       className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                     ></textarea>
                   </div>
@@ -473,7 +560,7 @@ export default function Index() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center mb-6">
               <img 
-                src="https://cdn.poehali.dev/files/92d10fa3-e56b-4e6e-9f31-864f3e21bd5d.jpeg" 
+                src="https://cdn.poehali.dev/files/318658ce-521b-41ec-b2cc-ef0fec265cce.png" 
                 alt="Sectores" 
                 className="h-12 w-auto object-contain"
               />
